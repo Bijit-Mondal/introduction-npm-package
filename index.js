@@ -1,22 +1,33 @@
 #!/usr/bin/env node
+
+const { exec } = require('child_process');
+
+const scriptPath = 'image.sh';
+
 // Function to log your details in the terminal
 function logDetails() {
-    const message = "Hey there! I'm Haimantika, a Developer Advocate by profession. Currently hacking with frontend, building communities and public speaking!";
-    const twitterLink = "https://twitter.com/HaimantikaM";
-    const linkedinLink = "https://www.linkedin.com/in/haimantika-mitra/";
-    const wesbiteLink = "https://haimantika.com";
-  
+    const message = "Hola! I am Bijit Modal, I love to learn new technologies and solve problems using it. I am currently undergraduate student";
+    const githubLink = "https://github.com/Bijit-Mondal";
+    const linkedinLink = "https://www.linkedin.com/in/bijit-mondal-3b196721b/";
+    const wesbiteLink = "https://codedhyan.netlify.app";
+
     // Create a colorful box using ANSI escape codes
-    const colorfulBox = `  \x1b[38;5;51m+---------------------------------------------------------------+
+    const colorfulBox = `\x1b[38;5;51m+---------------------------------------------------------------+
     |   \x1b[38;5;105m${message}\x1b[38;5;51m    |
     +---------------------------------------------------------------+
-    | \x1b[38;5;93mTwitter:\x1b[0m \x1b[38;5;39m${twitterLink}                     \x1b[38;5;51m|
+    | \x1b[38;5;93mGithub:\x1b[0m \x1b[38;5;39m${githubLink}                     \x1b[38;5;51m|
     | \x1b[38;5;93mLinkedIn:\x1b[0m \x1b[38;5;39m${linkedinLink}                 \x1b[38;5;51m|
     | \x1b[38;5;93mPortfolio:\x1b[0m  \x1b[38;5;39m${wesbiteLink}                      \x1b[38;5;51m|
     +----------------------------------------------------------------+\x1b[0m`;
-  
-    // Log the colorful box in the terminal
-    console.log(colorfulBox);
+
+    exec(`sh ${scriptPath}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`${stdout}`);
+        console.log(colorfulBox);
+    });
   }
   // Call the function to log your details
   logDetails();
