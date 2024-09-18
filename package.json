@@ -1,15 +1,22 @@
 {
   "name": "hello-bijit",
-  "version": "1.1.12",
-  "description": "",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Bijit Mondal Introduction",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "hello-bijit": "index.js"
+    "hello-bijit": "./index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Bijit Mondal",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "nanospinner": "^1.1.0",
+    "terminal-link": "^3.0.0"
+  }
 }

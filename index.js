@@ -1,34 +1,86 @@
-#!/usr/bin/env node
+import { createSpinner } from 'nanospinner';
+import colors from 'colors';
+import link from 'terminal-link';
 
-const { exec } = require('child_process');
+console.clear();
 
-// const scriptPath = 'image.sh';
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function printSkills(lang, header) {
+    const availableColors = shuffle(['cyan', 'green', 'blue','yellow']);
+    let output = `${header}`.brightGreen;
+    lang.forEach((l) => {
+        const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+        output += `${l[randomColor]}, `;
+    });
+    console.log(output.slice(0, -2)); // Remove the last comma and space
+}
 
 // Function to log your details in the terminal
-function logDetails() {
-    const message = "Hola! I am Bijit Modal, I love to learn new technologies and solve problems using it. I am currently undergraduate student working on CodeDhyan(https://codedhyan.netlify.app) and SpotOn(https://spoton.ilib.website)";
-    const githubLink = "https://github.com/Bijit-Mondal";
-    const linkedinLink = "https://www.linkedin.com/in/bijit-mondal-3b196721b/";
-    const wesbiteLink = "https://portfolio.bijit.xyz";
+async function logDetails() {
+    console.log(`
+░█░█░█▀▀░█░░░█░░░█▀█░░░█░█░▀█▀░█▀▀░▀█▀░▀█▀░█▀█░█▀▄
+░█▀█░█▀▀░█░░░█░░░█░█░░░▀▄▀░░█░░▀▀█░░█░░░█░░█░█░█▀▄
+░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░▀░░▀▀▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀
 
-    // Create a colorful box using ANSI escape codes
-    const colorfulBox = `\x1b[38;5;202m+---------------------------------------------------------------+
-    |   \x1b[38;5;208m${message}\x1b[38;5;202m    |
-    +---------------------------------------------------------------+
-    | \x1b[38;5;209mGithub:\x1b[0m \x1b[38;5;204m${githubLink}                     \x1b[38;5;202m|
-    | \x1b[38;5;209mLinkedIn:\x1b[0m \x1b[38;5;204m${linkedinLink}                 \x1b[38;5;202m|
-    | \x1b[38;5;209mPortfolio:\x1b[0m  \x1b[38;5;204m${wesbiteLink}                      \x1b[38;5;202m|
-    +----------------------------------------------------------------+\x1b[0m`;
+    `.brightRed);
+    console.log();
 
-    /* exec(`sh ${scriptPath}`, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`exec error: ${error}`);
-            return;
-        }
-        console.log(`${stdout}`);
-        console.log(colorfulBox);
-    }); */
-    console.log(colorfulBox);
-  }
-  // Call the function to log your details
-  logDetails();
+    const spinner = createSpinner('Loading Bijit\'s details...').start();
+
+    async function spinnerStart(){
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+
+    await spinnerStart();
+
+    spinner.success();
+
+    // Details
+    console.log(`
+███╗   ███╗███████╗
+████╗ ████║██╔════╝
+██╔████╔██║█████╗
+██║╚██╔╝██║██╔══╝
+██║ ╚═╝ ██║███████╗
+╚═╝     ╚═╝╚══════╝
+    `.brightYellow)
+
+
+    const website = link('Watch me struggling', 'https://bijit.xyz');
+    const githubLink = link('Watch me coding','https://github.com/Bijit-Mondal')
+    const xLink = link('Watch me chirping','https://x.com/BijitMondal10')
+
+    console.log(`Name:`.brightYellow +` Bijit Mondal`.brightBlue);
+    console.log(`Website:`.brightYellow + ` ${website}`.brightBlue);
+    console.log(`Github: `.brightYellow +`${githubLink}`.brightBlue);
+    console.log(`X: `.brightYellow +`${xLink}`.brightBlue);
+
+    console.log()
+
+
+
+    // Skills in ascii
+    console.log(`
+███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
+██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
+███████╗█████╔╝ ██║██║     ██║     ███████╗
+╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
+███████║██║  ██╗██║███████╗███████╗███████║
+╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝
+
+    `.brightGreen)
+    printSkills(['Java','JavaScript','C','Python'], 'Languages: ');
+    printSkills(['VueJS','ViteJs','Tailwind CSS'], 'Frontend: ');
+    printSkills(['SpringBoot','NuxtJS','NitroJS','Flask'],'Backend: ');
+    printSkills(['MySQL','Sqlite','PostgreSQL','MongoDB','Redis'],'Database: ');
+    printSkills(['Gitlab CI/CD','Docker','Kubernetes'],'Devops: ');
+}
+// Call the function to log your details
+logDetails();
